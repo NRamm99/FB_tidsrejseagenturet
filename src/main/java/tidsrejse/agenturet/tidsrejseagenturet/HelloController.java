@@ -12,5 +12,5 @@ public class HelloController {
         welcomeText.setText("This is not suppoesed to be here!");
     }
 
-    // This is supposed to stay
+    // This is better now!
 }
