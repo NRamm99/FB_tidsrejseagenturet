@@ -12,5 +12,5 @@ public class HelloController {
         welcomeText.setText("This is a test! And its awesome!");
     }
 
-    // This is better now!
+    // This branch is working perfectly
 }
