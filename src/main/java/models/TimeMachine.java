@@ -3,12 +3,12 @@ package models;
 public class TimeMachine {
     private String name;
     private int capacity;
-    private String status;
+    private boolean isFree;
 
-    public TimeMachine(int id, String name, int capacity, String status) {
+    public TimeMachine(int id, String name, int capacity) {
         this.name = name;
         this.capacity = capacity;
-        this.status = status;
+        this.isFree = true;
     }
 
     public String getName() {
@@ -19,7 +19,7 @@ public class TimeMachine {
         return capacity;
     }
 
-    public String getStatus() {
-        return status;
+    public boolean getStatus() {
+        return isFree;
     }
 }
