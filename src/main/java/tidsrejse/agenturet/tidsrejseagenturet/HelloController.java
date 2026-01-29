@@ -11,5 +11,5 @@ public class HelloController {
     protected void onHelloButtonClick() {
         welcomeText.setText("This is a test!");
     }
-    // test
+    // test 2
 }
