@@ -1,26 +1,26 @@
 package repositories;
 
 import config.DatabaseConfig;
-import models.Customer;
+import models.TimePeriod;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CustomerRepository {
+public class TimePeriodRepository {
     private final DatabaseConfig config;
 
-    public CustomerRepository(DatabaseConfig config) {
+    public TimePeriodRepository(DatabaseConfig config) {
         this.config = config;
     }
 
-    public void add(String name, String email) throws SQLException {
-        String sql = "INSERT INTO customers(name, email) values (?, ?)";
+    public void add(String name, String description) {
+        String sql = "INSERT INTO timeperiods (name, description) values (?, ?)";
 
         try (var conn = config.getConnection();
              var stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, name);
-            stmt.setString(2, email);
+            stmt.setString(2, description);
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -28,67 +28,70 @@ public class CustomerRepository {
         }
     }
 
-    public Customer getCustomerByName(String name) throws SQLException {
-        String sql = "SELECT id, name, email  FROM customers WHERE name =?";
+    public TimePeriod getTimePeriodByName(String name) throws SQLException {
+        String sql = "Select name, description FROM timeperiods WHERE name =?";
 
         try (var conn = config.getConnection();
              var stmt = conn.prepareStatement(sql)) {
+
             stmt.setString(1, name);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (!rs.next()) {
                     return null;
                 }
-                return new Customer(
-                        rs.getInt("id"),
+                return new TimePeriod(
                         rs.getString("name"),
-                        rs.getString("email")
+                        rs.getString("description")
                 );
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    public void remove(String name) throws SQLException {
-        String sql = "DELETE FROM customers WHERE name =?";
-
-        try (var conn = config.getConnection();
-             var stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, name);
-            stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     public void setName(String originalName, String newName) throws SQLException {
-        Customer customer = getCustomerByName(originalName);
+        TimePeriod timePeriod = getTimePeriodByName(originalName);
 
-        String sql = "UPDATE customers SET name = ? WHERE id = ?";
-
+        String sql = "UPDATE timeperiods SET name = ? WHERE name = ?";
         try (var conn = config.getConnection();
              var stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, newName);
-            stmt.setInt(2, customer.getId());
+            stmt.setString(2, timePeriod.getName());
             stmt.executeUpdate();
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void setCustomerEmail(String name, String newEmail) throws SQLException {
-        Customer customer = getCustomerByName(name);
+    public void setDescription(String name, String description) throws SQLException {
+        TimePeriod timePeriod = getTimePeriodByName(name);
 
-        String sql = "UPDATE customers SET email = ? WHERE id = ?";
+        String sql = "UPDATE timeperiods SET description = ? WHERE name = ?";
+        try (var conn = config.getConnection();
+             var stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, description);
+            stmt.setString(2, timePeriod.getName());
+            stmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void remove(String name) throws SQLException {
+        String sql = "DELETE FROM timeperiods WHERE name = ? ";
 
         try (var conn = config.getConnection();
              var stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, newEmail);
-            stmt.setInt(2, customer.getId());
-            stmt.executeUpdate();
+            stmt.setString(1, name);
 
+            int rows = stmt.executeUpdate();
+            if (rows == 0) {
+                System.out.println("No TimePeriod deleted. No row matched name = " + name);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

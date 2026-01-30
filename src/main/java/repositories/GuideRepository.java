@@ -2,25 +2,26 @@ package repositories;
 
 import config.DatabaseConfig;
 import models.Customer;
+import models.Guide;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CustomerRepository {
+public class GuideRepository {
     private final DatabaseConfig config;
 
-    public CustomerRepository(DatabaseConfig config) {
+    public GuideRepository(DatabaseConfig config) {
         this.config = config;
     }
 
-    public void add(String name, String email) throws SQLException {
-        String sql = "INSERT INTO customers(name, email) values (?, ?)";
+    public void add(String name, String speciality) throws SQLException {
+        String sql = "INSERT INTO guides(name, speciality) values (?, ?)";
 
         try (var conn = config.getConnection();
              var stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, name);
-            stmt.setString(2, email);
+            stmt.setString(2, speciality);
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -28,67 +29,71 @@ public class CustomerRepository {
         }
     }
 
-    public Customer getCustomerByName(String name) throws SQLException {
-        String sql = "SELECT id, name, email  FROM customers WHERE name =?";
+    public Guide getGuideByName(String name) throws SQLException {
+        String sql = "Select id, name, speciality FROM guides WHERE name =?";
 
         try (var conn = config.getConnection();
              var stmt = conn.prepareStatement(sql)) {
+
             stmt.setString(1, name);
             try (ResultSet rs = stmt.executeQuery()) {
                 if (!rs.next()) {
                     return null;
                 }
-                return new Customer(
+                return new Guide(
                         rs.getInt("id"),
                         rs.getString("name"),
-                        rs.getString("email")
+                        rs.getString("speciality")
                 );
             }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
-
-    public void remove(String name) throws SQLException {
-        String sql = "DELETE FROM customers WHERE name =?";
-
-        try (var conn = config.getConnection();
-             var stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, name);
-            stmt.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
     public void setName(String originalName, String newName) throws SQLException {
-        Customer customer = getCustomerByName(originalName);
+        Guide guide = getGuideByName(originalName);
 
-        String sql = "UPDATE customers SET name = ? WHERE id = ?";
-
+        String sql = "UPDATE guides SET name = ? WHERE id = ?";
         try (var conn = config.getConnection();
              var stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, newName);
-            stmt.setInt(2, customer.getId());
+            stmt.setInt(2, guide.getId());
             stmt.executeUpdate();
+
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public void setCustomerEmail(String name, String newEmail) throws SQLException {
-        Customer customer = getCustomerByName(name);
+    public void setSpeciality(String name, String newSpeciality) throws SQLException {
+        Guide guide = getGuideByName(name);
 
-        String sql = "UPDATE customers SET email = ? WHERE id = ?";
+        String sql = "UPDATE guides SET speciality = ? WHERE id = ?";
+        try (var conn = config.getConnection();
+             var stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, newSpeciality);
+            stmt.setInt(2, guide.getId());
+            stmt.executeUpdate();
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void remove(String name) throws SQLException {
+        String sql = "DELETE FROM guides WHERE name = ?";
 
         try (var conn = config.getConnection();
              var stmt = conn.prepareStatement(sql)) {
-            stmt.setString(1, newEmail);
-            stmt.setInt(2, customer.getId());
-            stmt.executeUpdate();
+            stmt.setString(1, name);
 
+            int rows = stmt.executeUpdate();
+            if (rows == 0) {
+                System.out.println("No guide deleted. No row matched name = " + name);
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

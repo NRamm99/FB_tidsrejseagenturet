@@ -22,4 +22,9 @@ public class Guide {
     public String getSpeciality() {
         return speciality;
     }
+
+    @Override
+    public String toString(){
+        return "ID: " + id + " | Name: " + name + " | Speciality: " + speciality;
+    }
 }

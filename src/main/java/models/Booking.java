@@ -12,4 +12,5 @@ public class Booking {
         this.timePeriod = timePeriod;
         this.guide = guide;
     }
+
 }

@@ -5,10 +5,16 @@ public class TimeMachine {
     private int capacity;
     private boolean isFree;
 
-    public TimeMachine(int id, String name, int capacity) {
+    public TimeMachine(String name, int capacity) {
         this.name = name;
         this.capacity = capacity;
         this.isFree = true;
+    }
+
+    public TimeMachine(String name, int capacity, boolean isFree) {
+        this.name = name;
+        this.capacity = capacity;
+        this.isFree = isFree;
     }
 
     public String getName() {
@@ -21,5 +27,13 @@ public class TimeMachine {
 
     public boolean getStatus() {
         return isFree;
+    }
+
+    @Override
+    public String toString() {
+        if (isFree) {
+            return "Name: " + name + " | Capacity: " + capacity + " | Status: Free";
+        }
+        return "Name: " + name + " | Capacity: " + capacity + " | Status: Occupied";
     }
 }
