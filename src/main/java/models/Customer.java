@@ -22,4 +22,10 @@ public class Customer {
     public String getEmail() {
         return email;
     }
+
+    @Override
+    public String toString(){
+        return "ID: " + id + " | Name: " + name + " | E-Mail: " + email;
+    }
+
 }
