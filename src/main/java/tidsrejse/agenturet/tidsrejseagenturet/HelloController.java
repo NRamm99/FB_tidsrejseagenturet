@@ -38,8 +38,8 @@ public class HelloController {
     }
 
     @FXML
-    private void handleButtonGuidesAction (ActionEvent event){
-        loadIntoCenter("Guides");
+    protected void onHelloButtonClick() {
+        welcomeText.setText("This is a test! And its awesome!");// test comment
     }
 
 
