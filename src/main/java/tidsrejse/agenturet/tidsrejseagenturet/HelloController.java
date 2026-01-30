@@ -38,12 +38,6 @@ public class HelloController {
         loadIntoCenter("Booking");
     }
 
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("This is a test! And its awesome!");// test comment
-    }
-
-
     private void loadIntoCenter(String pageName){
         Pane view = loader.getPage(pageName);
         if (view == null){
@@ -54,4 +48,7 @@ public class HelloController {
 
     }
 
+    public void handleButtonGuidesAction(ActionEvent actionEvent) {
+        loadIntoCenter("Guides");
+    }
 }
