@@ -1,10 +1,18 @@
+import config.DatabaseConfig;
 import models.Customer;
 import models.TimePeriod;
 import models.Guide;
 import models.Booking;
 import models.TimeMachine;
+import repositories.CustomerRepository;
 
 public class TimeTravelSystem {
+
+    public TimeTravelSystem(){
+        DatabaseConfig config = new DatabaseConfig();
+        CustomerRepository customerRepository = new CustomerRepository(config);
+
+    }
 
     public void createBooking() {
 
