@@ -5,10 +5,7 @@ import models.Customer;
 import models.Guide;
 import models.TimeMachine;
 import models.TimePeriod;
-import repositories.CustomerRepository;
-import repositories.GuideRepository;
-import repositories.TimeMachineRepository;
-import repositories.TimePeriodRepository;
+import repositories.*;
 
 import java.sql.SQLException;
 
@@ -18,6 +15,7 @@ public class TimeTravelSystem {
     GuideRepository guideRepository;
     TimeMachineRepository timeMachineRepository;
     TimePeriodRepository timePeriodRepository;
+    BookingRepository bookingRepository;
 
     public TimeTravelSystem() {
         this.databaseConfig = new DatabaseConfig();
@@ -25,19 +23,12 @@ public class TimeTravelSystem {
         this.guideRepository = new GuideRepository(databaseConfig);
         this.timeMachineRepository = new TimeMachineRepository(databaseConfig);
         this.timePeriodRepository = new TimePeriodRepository(databaseConfig);
+        this.bookingRepository = new BookingRepository(databaseConfig);
     }
 
     // BOOKING
-    public void createBooking() {
-
-    }
-
-    public void editBooking() {
-
-    }
-
-    public void removeBooking() {
-
+    public void addBooking(String customerName, String timeMachineName, String timePeriodName, String guideName) throws SQLException {
+        bookingRepository.add(customerName, timeMachineName, timePeriodName, guideName);
     }
 
     // GUIDE
@@ -110,7 +101,7 @@ public class TimeTravelSystem {
 
     // TIME PERIODS
     public void addTimePeriod(String name, String description) throws SQLException {
-        customerRepository.add(name, description);
+        timePeriodRepository.add(name, description);
     }
 
     public void setTimePeriodName(String originalName, String newName) throws SQLException {

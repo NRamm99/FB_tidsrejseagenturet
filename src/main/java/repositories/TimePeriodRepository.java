@@ -13,7 +13,7 @@ public class TimePeriodRepository {
         this.config = config;
     }
 
-    public void add(String name, String description) {
+    public void add(String name, String description) throws  SQLException{
         String sql = "INSERT INTO timeperiods (name, description) values (?, ?)";
 
         try (var conn = config.getConnection();
