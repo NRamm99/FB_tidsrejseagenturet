@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tidsrejse.agenturet.tidsrejseagenturet.BookingController">
    <center>
       <StackPane prefHeight="150.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -61,15 +60,15 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <ComboBox prefWidth="180.0" promptText="Vælg Kunde" GridPane.columnIndex="1" />
-                        <ComboBox prefWidth="180.0" promptText="Vælg Tidsmaksine" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <ComboBox prefWidth="180.0" promptText="Vælg Tidsperiode" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <ComboBox prefWidth="180.0" promptText="Vælg Guide" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="selectCustomer" prefWidth="180.0" promptText="Vælg Kunde" GridPane.columnIndex="1" />
+                        <ComboBox fx:id="selectTimeMachine" prefWidth="180.0" promptText="Vælg Tidsmaksine" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ComboBox fx:id="selectTimePeriod" prefWidth="180.0" promptText="Vælg Tidsperiode" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="selectGuide" prefWidth="180.0" promptText="Vælg Guide" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="35.0" prefWidth="120.0" text="Book" />
+                        <Button fx:id="confirmBooking" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#book" prefHeight="35.0" prefWidth="120.0" text="Book" />
                      </children>
                   </HBox>
                </children>
@@ -85,6 +84,6 @@
       </Label>
    </top>
    <bottom>
-      <Label text="pop der skal sige de mangler at vælge X" BorderPane.alignment="CENTER" />
+      <Label fx:id="bookingErrorLabel" text="pop der skal sige de mangler at vælge X" textFill="RED" BorderPane.alignment="CENTER" />
    </bottom>
 </BorderPane>

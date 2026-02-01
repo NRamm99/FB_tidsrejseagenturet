@@ -4,7 +4,6 @@ import config.DatabaseConfig;
 import javafx.application.Application;
 import systems.TimeTravelSystem;
 
-import java.sql.DatabaseMetaData;
 import java.sql.SQLException;
 
 public class Launcher {
@@ -15,6 +14,6 @@ public class Launcher {
         dc.dbInit();
 
 
-        Application.launch(HelloApplication.class, args);
+        Application.launch(RunApplication.class, args);
     }
 }

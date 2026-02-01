@@ -16,4 +16,8 @@ public class TimePeriod {
     public String getDescription() {
         return description;
     }
+
+    public String toString(){
+        return name + " - " + description;
+    }
 }

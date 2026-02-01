@@ -70,7 +70,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                tidsrejse.agenturet.tidsrejseagenturet/tidsrejse.agenturet.tidsrejseagenturet.HelloApplication
+                                tidsrejse.agenturet.tidsrejseagenturet/tidsrejse.agenturet.tidsrejseagenturet.RunApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>

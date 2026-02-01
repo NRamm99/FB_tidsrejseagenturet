@@ -6,6 +6,8 @@ import models.Guide;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GuideRepository {
     private final DatabaseConfig config;
@@ -98,4 +100,26 @@ public class GuideRepository {
             throw new RuntimeException(e);
         }
     }
+
+    public List<Guide> getAll() throws SQLException {
+        String sql = "SELECT id, name, speciality FROM guides";
+        List<Guide> result = new ArrayList<>();
+
+        try (var conn = config.getConnection();
+             var stmt = conn.prepareStatement(sql);
+             var rs = stmt.executeQuery()
+        ) {
+            while (rs.next()) {
+                result.add(new Guide(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("speciality")
+                ));
+            }
+            return result;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

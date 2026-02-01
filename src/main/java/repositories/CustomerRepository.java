@@ -5,6 +5,8 @@ import models.Customer;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CustomerRepository {
     private final DatabaseConfig config;
@@ -93,4 +95,54 @@ public class CustomerRepository {
             throw new RuntimeException(e);
         }
     }
+
+    public List<Customer> getAll() {
+        String sql = "SELECT id, name, email FROM customers";
+        List<Customer> result = new ArrayList<>();
+
+        try (var conn = config.getConnection();
+             var stmt = conn.prepareStatement(sql);
+             var rs = stmt.executeQuery()
+        ) {
+            while (rs.next()) {
+                result.add(new Customer(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email")
+                ));
+            }
+            return result;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<Customer> getAllWithoutBookings() {
+        String sql = """
+        SELECT c.id, c.name, c.email
+        FROM customers c
+        LEFT JOIN bookings b ON b.customerName = c.name
+        WHERE b.customerName IS NULL
+        """;
+
+        List<Customer> result = new ArrayList<>();
+
+        try (var conn = config.getConnection();
+             var stmt = conn.prepareStatement(sql);
+             var rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                result.add(new Customer(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email")
+                ));
+            }
+            return result;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

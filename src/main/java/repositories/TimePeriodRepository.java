@@ -5,6 +5,8 @@ import models.TimePeriod;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TimePeriodRepository {
     private final DatabaseConfig config;
@@ -92,6 +94,27 @@ public class TimePeriodRepository {
             if (rows == 0) {
                 System.out.println("No TimePeriod deleted. No row matched name = " + name);
             }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public List<TimePeriod> getAll() {
+        String sql = "SELECT name, description FROM timeperiods";
+        List<TimePeriod> result = new ArrayList<>();
+
+        try (var conn = config.getConnection();
+             var stmt = conn.prepareStatement(sql);
+             var rs = stmt.executeQuery()
+
+        ) {
+            while (rs.next()) {
+                result.add(new TimePeriod(
+                        rs.getString("name"),
+                        rs.getString("description")
+                ));
+            }
+            return result;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

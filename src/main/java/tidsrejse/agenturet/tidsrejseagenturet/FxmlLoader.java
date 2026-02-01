@@ -9,7 +9,7 @@ public class FxmlLoader {
 
     public Pane getPage(String fileName) {
         try {
-            URL fileUrl = HelloApplication.class.getResource("/tidsrejse/agenturet/tidsrejseagenturet/" + fileName + ".fxml");
+            URL fileUrl = RunApplication.class.getResource("/tidsrejse/agenturet/tidsrejseagenturet/" + fileName + ".fxml");
 
             if (fileUrl == null) {
                 throw new IOException("FXML file can't be found" + fileName);
@@ -20,8 +20,6 @@ public class FxmlLoader {
             return null;
         }
     }
-
-
 }
 
 

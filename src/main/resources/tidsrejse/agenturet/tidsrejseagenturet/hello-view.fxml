@@ -4,14 +4,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tidsrejse.agenturet.tidsrejseagenturet.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="439.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tidsrejse.agenturet.tidsrejseagenturet.ButtonMenuController">
    <children>
       <BorderPane fx:id="mainPane" layoutX="10.0" layoutY="10.0" prefHeight="440.0" prefWidth="665.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <left>
             <AnchorPane prefHeight="424.0" prefWidth="165.0" BorderPane.alignment="CENTER">
                <children>
                   <Button layoutX="18.0" layoutY="96.0" mnemonicParsing="false" onAction="#handleButtonCustomerAction" prefHeight="35.0" prefWidth="130.0" text="Kundeadministration" />
-                  <Button layoutX="18.0" layoutY="168.0" mnemonicParsing="false" onAction="#handleButtonTimeTravelMachinesAction" prefHeight="35.0" prefWidth="130.0" text="Tidsrejsemaskiner" />
+                  <Button layoutX="18.0" layoutY="168.0" mnemonicParsing="false" onAction="#handleButtonTimeMachinesAction" prefHeight="35.0" prefWidth="130.0" text="Tidsrejsemaskiner" />
                   <Button layoutX="18.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleButtonTimePeriodsAction" prefHeight="35.0" prefWidth="130.0" text="Tidsperioder" />
                   <Button layoutX="18.0" layoutY="384.0" mnemonicParsing="false" onAction="#handleButtonBookingAction" prefHeight="35.0" prefWidth="130.0" text="Booking" />
                   <Button layoutX="18.0" layoutY="24.0" mnemonicParsing="false" onAction="#handleButtonFrontPageAction" prefHeight="35.0" prefWidth="130.0" text="Forside" />

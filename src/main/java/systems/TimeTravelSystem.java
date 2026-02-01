@@ -7,6 +7,7 @@ import models.TimeMachine;
 import models.TimePeriod;
 import repositories.*;
 
+import java.util.List;
 import java.sql.SQLException;
 
 public class TimeTravelSystem {
@@ -31,6 +32,15 @@ public class TimeTravelSystem {
         bookingRepository.add(customerName, timeMachineName, timePeriodName, guideName);
     }
 
+    public int countBookingsByTimeMachine(String timeMachineName) throws SQLException {
+        return bookingRepository.countByTimeMachineName(timeMachineName);
+    }
+
+    public List<Customer> getAllCustomersWithoutBookings() throws SQLException {
+        return customerRepository.getAllWithoutBookings();
+    }
+
+
     // GUIDE
     public void addGuide(String name, String speciality) throws SQLException {
         guideRepository.add(name, speciality);
@@ -52,8 +62,12 @@ public class TimeTravelSystem {
         guideRepository.remove(name);
     }
 
+    public List<Guide> getAllGuides() throws SQLException{
+        return guideRepository.getAll();
+    }
+
     // TIME MACHINE
-    public void addTimeMachine(String name, int capacity) {
+    public void addTimeMachine(String name, int capacity) throws SQLException {
         timeMachineRepository.add(name, capacity);
     }
 
@@ -75,6 +89,10 @@ public class TimeTravelSystem {
 
     public void setTimeMachineStatus(String name, Boolean isFree) throws SQLException {
         timeMachineRepository.setStatus(name, isFree);
+    }
+
+    public List<TimeMachine> getAllTimeMachines()throws SQLException{
+        return timeMachineRepository.getAll();
     }
 
 
@@ -99,6 +117,11 @@ public class TimeTravelSystem {
         return customerRepository.getCustomerByName(name);
     }
 
+    public List<Customer> getAllCustomers() throws SQLException {
+        return customerRepository.getAll();
+    }
+
+
     // TIME PERIODS
     public void addTimePeriod(String name, String description) throws SQLException {
         timePeriodRepository.add(name, description);
@@ -114,5 +137,13 @@ public class TimeTravelSystem {
 
     public TimePeriod getTimePeriodByName(String name) throws SQLException {
         return timePeriodRepository.getTimePeriodByName(name);
+    }
+
+    public void removeTimePeriod (String name) throws SQLException{
+        timePeriodRepository.remove(name);
+    }
+
+    public List<TimePeriod> getAllTimePeriods()throws SQLException{
+        return timePeriodRepository.getAll();
     }
 }

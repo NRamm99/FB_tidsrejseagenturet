@@ -2,53 +2,59 @@ package tidsrejse.agenturet.tidsrejseagenturet;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import systems.TimeTravelSystem;
 
-public class HelloController {
+public class ButtonMenuController {
 
     private final FxmlLoader loader = new FxmlLoader();
+    private final TimeTravelSystem tts = new TimeTravelSystem();
 
     @FXML
     private BorderPane mainPane;
 
     @FXML
     private void handleButtonFrontPageAction (ActionEvent event){
-        loadIntoCenter("FrontPage");
+        loadIntoCenter("frontPage");
     }
 
     @FXML
     private void handleButtonCustomerAction (ActionEvent event){
-        loadIntoCenter("Customer");
+        loadIntoCenter("customer");
     }
 
     @FXML
-    private void handleButtonTimeTravelMachinesAction (ActionEvent event){
-        loadIntoCenter("TimeTravelMachines");
+    private void handleButtonTimeMachinesAction (ActionEvent event){
+        loadIntoCenter("timeMachines");
     }
 
     @FXML
     private void handleButtonTimePeriodsAction (ActionEvent event){
-        loadIntoCenter("TimePeriods");
+        loadIntoCenter("timePeriods");
     }
 
     @FXML
     private void handleButtonBookingAction (ActionEvent event){
-        loadIntoCenter("Booking");
+        loadIntoCenter("booking");
     }
 
-    private void loadIntoCenter(String pageName){
+    @FXML
+    public void handleButtonGuidesAction(ActionEvent actionEvent)  {
+        loadIntoCenter("guides");
+    }
+
+    private void loadIntoCenter (String pageName) {
         Pane view = loader.getPage(pageName);
         if (view == null){
             System.out.println("Kunne ikke loade " + pageName + ".fxml");
             return;
         }
         mainPane.setCenter(view);
-
     }
 
-    public void handleButtonGuidesAction(ActionEvent actionEvent) {
-        loadIntoCenter("Guides");
+    @FXML
+    private void initialize(){
+        loadIntoCenter("frontPage");
     }
 }

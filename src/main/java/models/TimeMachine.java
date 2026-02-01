@@ -32,8 +32,8 @@ public class TimeMachine {
     @Override
     public String toString() {
         if (isFree) {
-            return "Name: " + name + " | Capacity: " + capacity + " | Status: Free";
+            return "Navn: " + name + " | Kapacitet: " + capacity + " | Status: Ledig";
         }
-        return "Name: " + name + " | Capacity: " + capacity + " | Status: Occupied";
+        return "Navn: " + name + " | Kapacitet: " + capacity + " | Status: Optaget";
     }
 }
