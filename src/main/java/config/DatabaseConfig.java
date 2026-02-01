@@ -63,6 +63,7 @@ public class DatabaseConfig {
         // Connect to "server level" (no DB needed) by taking everything before the first "/" after host:port.
         // Example: jdbc:mysql://localhost:3306/tidsrejse_agenturet_db?useSSL=false
         // becomes:  jdbc:mysql://localhost:3306/?useSSL=false
+
         String serverUrl = url.replaceFirst("(?i)(jdbc:mysql://[^/]+)(/[^?]*)?(\\?.*)?$", "$1/$3");
 
         try (Connection conn = DriverManager.getConnection(serverUrl, user, password);

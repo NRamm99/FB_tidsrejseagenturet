@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tidsrejse.agenturet.tidsrejseagenturet.TimeMachineController">
+   <children>
+      <BorderPane layoutX="30.0" layoutY="30.0" prefHeight="450.0" prefWidth="708.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <left>
+            <AnchorPane prefHeight="427.0" prefWidth="320.0" style="-fx-background-color: #00008B;" BorderPane.alignment="CENTER">
+               <children>
+                  <SplitPane dividerPositions="0.8" layoutX="14.0" layoutY="42.0" orientation="VERTICAL" prefHeight="427.0" prefWidth="320.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <items>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <ListView fx:id="timeMachineList" layoutX="25.0" layoutY="14.0" prefHeight="337.0" prefWidth="318.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <HBox layoutX="75.0" layoutY="-11.0" prefHeight="77.0" prefWidth="318.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <Button fx:id="timeMachineDelete" onAction="#deleteTimeMachine" mnemonicParsing="false" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #00008B;" text="Slet Tidsmaskine" textFill="WHITE">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets left="89.0" top="25.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </items>
+                  </SplitPane>
+               </children>
+            </AnchorPane>
+         </left>
+         <right>
+            <AnchorPane prefHeight="427.0" prefWidth="338.0" BorderPane.alignment="CENTER">
+               <children>
+                  <TextField fx:id="timeMachineName" layoutX="94.0" layoutY="155.0" promptText="Navn" style="-fx-background-color: transparent; -fx-border-color: #00008B; -fx-border-width: 0px 0px 2px 0px;" />
+                  <TextField fx:id="timeMachineCapacity" layoutX="94.0" layoutY="201.0" promptText="Kapacitet" style="-fx-background-color: transparent; -fx-border-color: #00008B; -fx-border-width: 0px 0px 2px 0px;" />
+                  <Button fx:id="timeMachineCreate" onAction="#addTimeMachine" layoutX="19.0" layoutY="261.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="140.0" style="-fx-background-color: #00008B;" text="Opret" textFill="WHITE">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="timeMachineErrorLabel" layoutX="50.0" layoutY="340.0" textFill="RED" />
+                  <Label layoutX="69.0" layoutY="66.0" text="Tidsmaskine" textFill="DARKBLUE">
+                     <font>
+                        <Font name="System Bold" size="36.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="timeMachineEdit" onAction="#saveChanges" layoutX="178.0" layoutY="261.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="140.0" style="-fx-background-color: #00008B;" text="Gem Ændringer" textFill="WHITE">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </right>
+      </BorderPane>
+   </children>
+</AnchorPane>

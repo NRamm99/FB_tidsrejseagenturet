@@ -29,4 +29,25 @@ public class BookingRepository {
             throw new RuntimeException(e);
         }
     }
+
+    public int countByTimeMachineName(String timeMachineName) {
+        String sql = "SELECT COUNT(*) AS c FROM bookings WHERE timeMachineName = ?";
+
+        try (var conn = config.getConnection();
+             var stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, timeMachineName);
+
+            try (var rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("c");
+                }
+                return 0;
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }
