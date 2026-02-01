@@ -36,6 +36,11 @@ public class TimeTravelSystem {
         return bookingRepository.countByTimeMachineName(timeMachineName);
     }
 
+    public List<Customer> getAllCustomersWithoutBookings() throws SQLException {
+        return customerRepository.getAllWithoutBookings();
+    }
+
+
     // GUIDE
     public void addGuide(String name, String speciality) throws SQLException {
         guideRepository.add(name, speciality);

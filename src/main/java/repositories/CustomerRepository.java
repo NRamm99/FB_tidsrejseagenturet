@@ -117,5 +117,32 @@ public class CustomerRepository {
         }
     }
 
+    public List<Customer> getAllWithoutBookings() {
+        String sql = """
+        SELECT c.id, c.name, c.email
+        FROM customers c
+        LEFT JOIN bookings b ON b.customerName = c.name
+        WHERE b.customerName IS NULL
+        """;
+
+        List<Customer> result = new ArrayList<>();
+
+        try (var conn = config.getConnection();
+             var stmt = conn.prepareStatement(sql);
+             var rs = stmt.executeQuery()) {
+
+            while (rs.next()) {
+                result.add(new Customer(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("email")
+                ));
+            }
+            return result;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }

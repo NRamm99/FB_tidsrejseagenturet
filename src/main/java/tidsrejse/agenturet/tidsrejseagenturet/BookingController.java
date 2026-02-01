@@ -70,12 +70,17 @@ public class BookingController {
         });
 
         // TimeMachine + TimePeriod bruger default toString
-        refreshChoices();
+
+        selectCustomer.sceneProperty().addListener((observable,oldScene, newScene ) ->{
+            if (newScene != null){
+                refreshChoices();
+            }
+        });
     }
 
     private void refreshChoices() {
         try {
-            customers.setAll(tts.getAllCustomers());
+            customers.setAll(tts.getAllCustomersWithoutBookings());
             timeMachines.clear();
             //checker om timemachine er ledig
             for (var tm : tts.getAllTimeMachines()){
@@ -138,7 +143,6 @@ public class BookingController {
                 tts.setTimeMachineStatus(timeMachine.getName(), false); // false = optaget
             }
 
-            customers.remove(customer);
             bookingErrorLabel.setText("Booking oprettet!");
 
         } catch (SQLException e) {
