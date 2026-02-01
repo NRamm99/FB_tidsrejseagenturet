@@ -45,24 +45,8 @@ public class DatabaseConfig {
         return DriverManager.getConnection(url, user, password);
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
     public void dbInit() {
         final String dbName = "tidsrejse_agenturet_db";
-
-        // Connect to "server level" (no DB needed) by taking everything before the first "/" after host:port.
-        // Example: jdbc:mysql://localhost:3306/tidsrejse_agenturet_db?useSSL=false
-        // becomes:  jdbc:mysql://localhost:3306/?useSSL=false
 
         String serverUrl = url.replaceFirst("(?i)(jdbc:mysql://[^/]+)(/[^?]*)?(\\?.*)?$", "$1/$3");
 
@@ -103,7 +87,6 @@ public class DatabaseConfig {
                     )
                     """);
 
-            // NOTE: your original timeperiods had no PK. Keeping it EXACTLY as you wrote:
             stmt.executeUpdate("""
                     CREATE TABLE IF NOT EXISTS timeperiods (
                         name VARCHAR(20) NOT NULL,

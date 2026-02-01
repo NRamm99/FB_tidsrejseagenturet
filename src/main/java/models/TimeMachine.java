@@ -1,15 +1,9 @@
 package models;
 
 public class TimeMachine {
-    private String name;
-    private int capacity;
-    private boolean isFree;
-
-    public TimeMachine(String name, int capacity) {
-        this.name = name;
-        this.capacity = capacity;
-        this.isFree = true;
-    }
+    private final String name;
+    private final int capacity;
+    private final boolean isFree;
 
     public TimeMachine(String name, int capacity, boolean isFree) {
         this.name = name;

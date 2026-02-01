@@ -2,13 +2,10 @@ package tidsrejse.agenturet.tidsrejseagenturet;
 
 import config.DatabaseConfig;
 import javafx.application.Application;
-import systems.TimeTravelSystem;
 
-import java.sql.SQLException;
 
 public class Launcher {
-    public static void main(String[] args) throws SQLException {
-        TimeTravelSystem tts = new TimeTravelSystem();
+     static void main(String[] args)  {
         DatabaseConfig dc = new DatabaseConfig();
 
         dc.dbInit();
